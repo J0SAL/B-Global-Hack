@@ -8,13 +8,10 @@ import { alertBox } from "../../utils";
 
 function AuthState({ children }) {
   const [user, setUser] = useState(null);
-  // const router = useRouter();
   const cookies = new Cookies();
 
   useEffect(() => {
-    const mUser = {
-      user_name: "Siddhika Rakshe",
-    }; //cookies.get("user");
+    const mUser = cookies.get("user");
     if (!mUser) {
       setUser(null);
     } else {
@@ -23,21 +20,17 @@ function AuthState({ children }) {
   }, []);
 
   const login = async (formData) => {
-    await axiosClient
-      .post("login", formData)
-      .then(function (response) {
-        const res = response.data;
-        setUser(res);
-        cookies.set("user", JSON.stringify(res), {
-          path: "/",
-          maxAge: 60 * 60 * 24,
-        });
-        alertBox("Login Successful!", "success");
-      })
-      .catch(function (error) {
-        alertBox();
-        console.log(error);
+    try {
+      setUser(formData);
+      cookies.set("user", JSON.stringify(formData), {
+        path: "/",
+        maxAge: 60 * 60 * 24,
       });
+      alertBox("Login Successful!", "success");
+    } catch (e) {
+      alertBox();
+      console.log(error);
+    }
   };
 
   const register = async (formData) => {

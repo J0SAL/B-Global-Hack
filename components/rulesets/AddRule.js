@@ -26,7 +26,9 @@ function AddRule() {
       activeRuleIndex != null &&
       editRuleData != rules[activeRuleIndex].ruleContent
     ) {
-      alertBox("rule not saved");
+      alertBox(
+        `Please save ${rules[activeRuleIndex].ruleName} before moving to ${rules[key].ruleName}`
+      );
       return;
     }
 

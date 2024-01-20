@@ -6,11 +6,11 @@ import {
   faUnlockAlt,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import authContext from "../../hooks/AuthContext/authContext";
 
 const initData = {
-  email: "",
+  user_name: "",
   password: "",
 };
 
@@ -22,7 +22,7 @@ function Login() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
   const canSubmit =
-    formData.email.length > 0 && formData.password.length > 0 && !loading;
+    formData.user_name.length > 0 && formData.password.length > 0 && !loading;
   const handleSubmit = async (e) => {
     try {
       setLoading(true);
@@ -38,8 +38,8 @@ function Login() {
     <div>
       <Form className="mt-4" onSubmit={handleSubmit}>
         <h3>Login</h3>
-        <Form.Group id="brid" className="mb-4">
-          <Form.Label>Your Brid</Form.Label>
+        <Form.Group id="user_name" className="mb-4">
+          <Form.Label>Your Name</Form.Label>
           <InputGroup>
             <InputGroup.Text className="px-2">
               <FontAwesomeIcon icon={faEnvelope} style={{ width: "15px" }} />
@@ -47,9 +47,9 @@ function Login() {
             <Form.Control
               autoFocus
               required
-              name="brid"
+              name="user_name"
               type="text"
-              placeholder="G-XXXXXXXX"
+              placeholder="John Doe"
               onChange={handleChange}
             />
           </InputGroup>

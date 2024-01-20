@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Tab, Tabs } from "react-bootstrap";
-import Note from "../components/docs/Note";
-import Selection from "../components/docs/Selection";
+import Note from "../components/dashboard/Note";
+import Selection from "../components/dashboard/Selection";
 import Link from "next/link";
 
 function docs() {

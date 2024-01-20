@@ -1,4 +1,3 @@
-// import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import axiosClient from "./../../services/axios-client";

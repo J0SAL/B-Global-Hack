@@ -6,7 +6,6 @@ import DataState from "../hooks/DataContext/DataState";
 import Layout from "../components/common/Layout";
 import Head from "next/head";
 import React from "react";
-import DishState from "../hooks/DishContext/DishState";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,12 +19,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <AuthState>
         <DataState>
-          <DishState>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-            <ToastContainer />
-          </DishState>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+          <ToastContainer />
         </DataState>
       </AuthState>
     </React.Fragment>

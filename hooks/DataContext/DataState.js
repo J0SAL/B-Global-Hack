@@ -7,8 +7,9 @@ function DataState({ children }) {
   const [rules, setRules] = useState([]);
   const [editRuleData, setEditRuleData] = useState("");
 
+  // set data
   const [data, setData] = useState(null);
-  // day footfall prediction
+  // get data
   const getData = async (formData) => {
     // console.log(formData);
     await axiosClient

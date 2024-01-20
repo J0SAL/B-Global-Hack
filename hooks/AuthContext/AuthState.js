@@ -13,7 +13,9 @@ function AuthState({ children }) {
   const cookies = new Cookies();
 
   useEffect(() => {
-    const mUser = cookies.get("user");
+    const mUser = {
+      user_name: "Siddhika Rakshe",
+    }; //cookies.get("user");
     if (!mUser) {
       setUser(null);
     } else {

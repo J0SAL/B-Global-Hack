@@ -37,8 +37,9 @@ function Login() {
   return (
     <div>
       <Form className="mt-4" onSubmit={handleSubmit}>
-        <Form.Group id="email" className="mb-4">
-          <Form.Label>Your Email</Form.Label>
+        <h3>Login</h3>
+        <Form.Group id="brid" className="mb-4">
+          <Form.Label>Your Brid</Form.Label>
           <InputGroup>
             <InputGroup.Text className="px-2">
               <FontAwesomeIcon icon={faEnvelope} style={{ width: "15px" }} />
@@ -46,9 +47,9 @@ function Login() {
             <Form.Control
               autoFocus
               required
-              name="email"
-              type="email"
-              placeholder="example@company.com"
+              name="brid"
+              type="text"
+              placeholder="G-XXXXXXXX"
               onChange={handleChange}
             />
           </InputGroup>

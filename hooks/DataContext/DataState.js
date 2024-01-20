@@ -12,6 +12,11 @@ function DataState({ children }) {
   const [dayComment, setDayComment] = useState(null);
   const [dayRevenueComment, setDayRevenueComment] = useState(null);
 
+  let demo_rules = [];
+  const [activeRuleIndex, setActiveRuleIndex] = useState(null);
+  const [rules, setRules] = useState(demo_rules);
+  const [editRuleData, setEditRuleData] = useState("");
+
   // day footfall prediction
   const getDayPrediction = async (formData) => {
     // console.log("day Prediction");
@@ -90,6 +95,12 @@ function DataState({ children }) {
   return (
     <DataContext.Provider
       value={{
+        rules,
+        activeRuleIndex,
+        editRuleData,
+        setEditRuleData,
+        setActiveRuleIndex,
+        setRules,
         dayPrediction,
         weekPrediction,
         actualFootfall,

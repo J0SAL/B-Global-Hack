@@ -3,11 +3,13 @@ import style from "./Steps.module.css";
 function Note() {
   return (
     <div className="my-5">
-      <h6 className={style.special_note}>
-        <u>Note</u>: Recommended to run for at least 3 months to get accurate
-        predictions. If any interruptions in software runtime it can be resumed
-        from that checkpoint.
-      </h6>
+      {/* <h6 className={style.special_note}> */}
+      <p>
+        {" "}
+        You can manage the rulesets, approval requests, deployment requests,
+        compare rulesets for application fraud domain.
+      </p>
+      {/* </h6> */}
     </div>
   );
 }

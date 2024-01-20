@@ -5,17 +5,19 @@ import { Container } from "react-bootstrap";
 import About from "../components/home/About";
 import Purpose from "../components/home/Purpose";
 import Services from "../components/home/Services";
+import Home from "../components/home/Home";
 
 function HomePage() {
   return (
     <>
       <Script src="/static/scripts.js"></Script>
       <Container>
-        <About />
+        <Home />
+        {/* <About />
         <div className="my-5"></div>
         <Purpose />
         <hr className="my-5" />
-        <Services />
+        <Services /> */}
       </Container>
     </>
   );

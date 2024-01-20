@@ -14,11 +14,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
       <Head>
-        <title>Rush Estimator</title>
-        <meta
-          name="description"
-          content="Restaurent Rush Estimator by Elite Coders"
-        />
+        <title>Prime</title>
+        <meta name="description" content="Sense Pro by Bits and Bytes" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthState>

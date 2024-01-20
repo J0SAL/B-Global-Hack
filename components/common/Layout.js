@@ -8,7 +8,7 @@ function Layout({ children }) {
     <div className="layout-container">
       <div className="main">
         <PageNavbar />
-        <Banner />
+        {/* <Banner /> */}
         <div>{children}</div>
         <Footer />
       </div>

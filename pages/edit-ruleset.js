@@ -3,6 +3,7 @@ import { Container, Tab, Tabs } from "react-bootstrap";
 import Rules from "../components/rulesets/Rules";
 import DataDictionary from "../components/rulesets/DataDictionary";
 import GeneratedCode from "../components/rulesets/GeneratedCode";
+import Link from "next/link";
 
 function editRuleset() {
   return (
@@ -24,6 +25,9 @@ function editRuleset() {
             <GeneratedCode />
           </Tab>
         </Tabs>
+        <Link href="/dashboard" passHref>
+          <a>Back</a>
+        </Link>
       </Container>
     </div>
   );

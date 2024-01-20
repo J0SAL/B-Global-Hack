@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, Tab, Tabs } from "react-bootstrap";
+import { Button, Container, Tab, Tabs } from "react-bootstrap";
 import Note from "../components/docs/Note";
 import Selection from "../components/docs/Selection";
+import Link from "next/link";
 
 function docs() {
   return (
@@ -22,6 +23,9 @@ function docs() {
           <Tab eventKey="test" title="Test hub"></Tab>
           <Tab eventKey="compare" title="Compare Rulesets"></Tab>
         </Tabs>
+        <Link href="/sign-in" passHref>
+          <a>Back</a>
+        </Link>
       </Container>
     </div>
   );

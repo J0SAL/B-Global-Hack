@@ -13,7 +13,7 @@ function Selection() {
         <div className="col-2 my-2">
           <div className="mb-2">Select Ruleset</div>
           <Form.Select size="md" onChange={(e) => setRuleSet(e.target.value)}>
-            <option value=""></option>
+            <option value="" hidden></option>
             <option value="APPLY-CREDIT-CARD">APPLY-CREDIT-CARD</option>
             <option value="APPLICATION">APPLICATION</option>
             <option value="APPLY-INSTANT-BUS">APPLY-INSTANT-BUS</option>
@@ -27,7 +27,7 @@ function Selection() {
             disabled={ruleset == ""}
             onChange={(e) => setRuleGroup(e.target.value)}
           >
-            <option></option>
+            <option value="" hidden></option>
             <option value="champion">CHAMPION</option>
             <option value="shadow">SHADOW</option>
           </Form.Select>

@@ -105,9 +105,24 @@ var demo_rulesets = [
 ];
 
 function DataState({ children }) {
-  const [rulesets, setRulesets] = useState(demo_rulesets);
+  const [rulesets, setRulesets] = useState([]);
 
   const [activeRuleIndex, setActiveRuleIndex] = useState(null);
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const item = localStorage.getItem("prime_rulesets");
+      console.log(item);
+      setRulesets(JSON.parse(item));
+    } else {
+      console.error("localStorage is not available in this environment.");
+    }
+    // localStorage.setItem("prime_rulesets", JSON.stringify(demo_rulesets));
+  }, []);
+
+  const updateLocalStorage = (data) => {
+    localStorage.setItem("prime_rulesets", JSON.stringify(data));
+  };
 
   const getRules = async () => {};
   const addRule = async (rulesetID, rule) => {
@@ -116,6 +131,7 @@ function DataState({ children }) {
     rule.rule_id = t[idx].rules.length + 1;
     t[idx].rules.push(rule);
     setRulesets(t);
+    updateLocalStorage(t);
   };
   const updateRule = async (rulesetID, rule) => {
     let t = rulesets;
@@ -126,9 +142,12 @@ function DataState({ children }) {
     t[rulesets_idx].rules[rule_idx] = rule;
 
     setRulesets(t);
+    updateLocalStorage(t);
   };
 
   const addRuleset = async (ruleset) => {
+    ruleset.id = rulesets.length + 1;
+    updateLocalStorage([...rulesets, ruleset]);
     setRulesets([...rulesets, ruleset]);
   };
   const deleteRule = async () => {};

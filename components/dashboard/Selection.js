@@ -13,7 +13,7 @@ function Selection() {
   useEffect(() => {
     if (!currentRuleset && !currentRulesetgroup) return;
     setRulesetData(
-      rulesets.filter(
+      rulesets?.filter(
         (ruleset) =>
           ruleset.name == currentRuleset && ruleset.group == currentRulesetgroup
       )
@@ -34,7 +34,6 @@ function Selection() {
     if (files) {
       if (confirm("Add rule to the ruleset?")) {
         let jsonfile = JSON.parse(files);
-        console.log(jsonfile);
         addRuleset(jsonfile);
       }
     }

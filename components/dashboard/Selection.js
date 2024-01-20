@@ -1,18 +1,53 @@
 import Link from "next/link";
-import React, { useState } from "react";
-import { Dropdown, Form, Nav } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Dropdown, Form, Nav } from "react-bootstrap";
 import RulesTable from "./RulesTable";
+import dataContext from "../../hooks/DataContext/dataContext";
 
 function Selection() {
-  const [ruleset, setRuleSet] = useState("");
-  const [rulegroup, setRuleGroup] = useState("");
+  const { rulesets, addRuleset } = useContext(dataContext);
+  const [rulesetData, setRulesetData] = useState([]);
+  const [currentRuleset, setCurrentRuleSet] = useState("");
+  const [currentRulesetgroup, setCurrentRulesetGroup] = useState("");
 
+  useEffect(() => {
+    if (!currentRuleset && !currentRulesetgroup) return;
+    setRulesetData(
+      rulesets.filter(
+        (ruleset) =>
+          ruleset.name == currentRuleset && ruleset.group == currentRulesetgroup
+      )
+    );
+  }, [rulesets, currentRuleset, currentRulesetgroup]);
+
+  const [files, setFiles] = useState("");
+
+  const handleFileChange = (e) => {
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0], "UTF-8");
+    fileReader.onload = (e) => {
+      setFiles(e.target.result);
+    };
+  };
+
+  useEffect(() => {
+    if (files) {
+      if (confirm("Add rule to the ruleset?")) {
+        let jsonfile = JSON.parse(files);
+        console.log(jsonfile);
+        addRuleset(jsonfile);
+      }
+    }
+  }, [files]);
   return (
     <div>
-      <div className="row">
-        <div className="col-2 my-2">
+      <div className="row my-2">
+        <div className="col-2">
           <div className="mb-2">Select Ruleset</div>
-          <Form.Select size="md" onChange={(e) => setRuleSet(e.target.value)}>
+          <Form.Select
+            size="md"
+            onChange={(e) => setCurrentRuleSet(e.target.value)}
+          >
             <option value="" hidden></option>
             <option value="APPLY-CREDIT-CARD">APPLY-CREDIT-CARD</option>
             <option value="APPLICATION">APPLICATION</option>
@@ -20,25 +55,39 @@ function Selection() {
             <option value="CARD-BLOCK">CARD-BLOCK</option>
           </Form.Select>
         </div>
-        <div className="col-2 my-2">
+        <div className="col-2">
           <div className="mb-2">Select Ruleset group</div>
           <Form.Select
             size="md"
-            disabled={ruleset == ""}
-            onChange={(e) => setRuleGroup(e.target.value)}
+            disabled={currentRuleset == ""}
+            onChange={(e) => setCurrentRulesetGroup(e.target.value)}
           >
             <option value="" hidden></option>
-            <option value="champion">CHAMPION</option>
-            <option value="shadow">SHADOW</option>
+            <option value="CHAMPION">CHAMPION</option>
+            <option value="SHADOW">SHADOW</option>
           </Form.Select>
         </div>
-      </div>
-      {rulegroup == "champion" && (
-        <div className="row">
-          <hr />
-          <RulesTable />
+        <div className="col-2">
+          <div className="mb-2">Upload a ruleset</div>
+          <input
+            type="file"
+            accept=".json"
+            onChange={handleFileChange}
+            style={{
+              color: "black",
+              background: "white",
+              border: "1px solid black",
+            }}
+          />
         </div>
-      )}
+      </div>
+      <div className="row" style={{ minHeight: "33vh" }}>
+        <hr />
+        {rulesetData && <RulesTable rulesetData={rulesetData} />}
+        <Link href="/" passHref>
+          <a>Back</a>
+        </Link>
+      </div>
     </div>
   );
 }

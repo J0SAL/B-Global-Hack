@@ -17,3 +17,14 @@ export function sentenceCase(str) {
 export const alertBox = (message = "Something went wrong", type = "error") => {
   toast(message, { type: type });
 };
+
+export const exportToJson = (data) => {
+  const file_name = data.name + "_" + data.group + "_" + data.version + ".json";
+  const fileData = JSON.stringify(data);
+  const blob = new Blob([fileData], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.download = file_name;
+  link.href = url;
+  link.click();
+};

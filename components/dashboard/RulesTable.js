@@ -1,34 +1,15 @@
 import Link from "next/link";
-import React from "react";
 import { Button, Dropdown, Nav, Table } from "react-bootstrap";
+import { exportToJson } from "../../utils";
 
-var ruleset_data = [
-  {
-    version: "2.1.1",
-    status: "Draft",
-    lastmodifiedby: "Joy Almieda",
-    lastmodifieddate: "2023-12-22 08:56:36",
-    options: ["Edit Ruleset", "View change log", "Reset working copy"],
-  },
-  {
-    version: "2.1.0",
-    status: "Champion",
-    lastmodifiedby: "Omkar Pavtekar",
-    lastmodifieddate: "2023-05-26 07:53:36",
-    options: ["View Ruleset", "View change log"],
-  },
-  {
-    version: "2.0.1",
-    status: "Previously Deployed",
-    lastmodifiedby: "Sagarika Matey",
-    lastmodifieddate: "2023-01-10 08:56:36",
-    options: ["View Ruleset", "View change log"],
-  },
-];
-
-function RulesTable() {
+function RulesTable({ rulesetData }) {
   return (
-    <div>
+    <div
+      style={{
+        height: "32vh",
+        overflowY: "scroll",
+      }}
+    >
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -40,12 +21,12 @@ function RulesTable() {
           </tr>
         </thead>
         <tbody>
-          {ruleset_data.map((item, index) => (
+          {rulesetData.map((ruleset_item, index) => (
             <tr key={index}>
-              <td>{item.version}</td>
-              <td>{item.status}</td>
-              <td>{item.lastmodifiedby}</td>
-              <td>{item.lastmodifieddate}</td>
+              <td>{ruleset_item.version}</td>
+              <td>{ruleset_item.status}</td>
+              <td>{ruleset_item.lastmodifiedby}</td>
+              <td>{ruleset_item.lastmodifieddate}</td>
               <td>
                 <Dropdown>
                   <Dropdown.Toggle variant="" id="dropdown-basic">
@@ -53,9 +34,19 @@ function RulesTable() {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    {item.options.map((link, key) => (
-                      <Link href="/edit-ruleset" passHref>
-                        <Dropdown.Item>{link}</Dropdown.Item>
+                    <Dropdown.Item onClick={() => exportToJson(ruleset_item)}>
+                      Download
+                    </Dropdown.Item>
+                    {ruleset_item.options.map((link, key) => (
+                      <Link
+                        href={{
+                          pathname: link.link ?? "#",
+                          query: { id: ruleset_item.id },
+                        }}
+                        key={key}
+                        passHref
+                      >
+                        <Dropdown.Item>{link.name}</Dropdown.Item>
                       </Link>
                     ))}
                   </Dropdown.Menu>

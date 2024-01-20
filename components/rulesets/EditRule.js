@@ -3,18 +3,20 @@ import dataContext from "../../hooks/DataContext/dataContext";
 import { Button, Form } from "react-bootstrap";
 import { alertBox } from "../../utils";
 
-function EditRule() {
-  const { activeRuleIndex, rules, editRuleData, setRules, setEditRuleData } =
-    useContext(dataContext);
+function EditRule({ id, editRule, setEditRule }) {
+  const { activeRuleIndex, rulesets, updateRule } = useContext(dataContext);
+
+  const [rules, setRules] = useState([]);
   useEffect(() => {
-    setEditRuleData(rules[activeRuleIndex]?.ruleContent);
-  }, [activeRuleIndex]);
+    setRules(rulesets.find((item) => item.id == id)?.rules);
+  }, [id, rulesets]);
+
+  useEffect(() => {
+    if (activeRuleIndex != null) setEditRule(rules[activeRuleIndex]);
+  }, [id, activeRuleIndex]);
 
   const handleRuleSave = () => {
-    let newRules = rules;
-    newRules[activeRuleIndex].ruleContent = editRuleData;
-    setRules(newRules);
-    // setEditRuleData("");
+    updateRule(id, editRule);
     alertBox(`${rules[activeRuleIndex].ruleName} Updated`, "success");
   };
   return (
@@ -27,10 +29,13 @@ function EditRule() {
       >
         <Form.Control
           as="textarea"
+          name="ruleContent"
           placeholder="Enter Your Rules"
           style={{ height: "45vh" }}
-          onChange={(e) => setEditRuleData(e.target.value)}
-          value={editRuleData}
+          onChange={(e) =>
+            setEditRule({ ...editRule, ruleContent: e.target.value })
+          }
+          value={editRule.ruleContent}
           disabled={activeRuleIndex == null}
         ></Form.Control>
         <div

@@ -4,8 +4,11 @@ import Rules from "../components/rulesets/Rules";
 import DataDictionary from "../components/rulesets/DataDictionary";
 import GeneratedCode from "../components/rulesets/GeneratedCode";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function editRuleset() {
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <div style={{ height: "80vh" }}>
       <Container>
@@ -16,13 +19,13 @@ function editRuleset() {
           className="mb-3 mt-5"
         >
           <Tab eventKey="rules" title="Rules">
-            <Rules />
+            <Rules id={id} />
           </Tab>
           <Tab eventKey="data-dictionary" title="Data Dictionary">
-            <DataDictionary />
+            <DataDictionary id={id} />
           </Tab>
           <Tab eventKey="generated-code" title="Generated Code">
-            <GeneratedCode />
+            <GeneratedCode id={id} />
           </Tab>
         </Tabs>
         <Link href="/dashboard" passHref>

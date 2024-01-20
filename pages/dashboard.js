@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function docs() {
   return (
-    <div style={{ height: "80vh" }}>
+    <div>
       <Container>
         <h2 className="mt-3">Application Fraud</h2>
         <Note />
@@ -23,9 +23,6 @@ function docs() {
           <Tab eventKey="test" title="Test hub"></Tab>
           <Tab eventKey="compare" title="Compare Rulesets"></Tab>
         </Tabs>
-        <Link href="/sign-in" passHref>
-          <a>Back</a>
-        </Link>
       </Container>
     </div>
   );

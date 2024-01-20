@@ -1,47 +1,37 @@
 import { faCirclePlus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import dataContext from "../../hooks/DataContext/dataContext";
 import { alertBox } from "../../utils";
 
-function AddRule() {
-  const { activeRuleIndex, editRuleData, setActiveRuleIndex, rules, setRules } =
+function AddRule({ id, rule, editRule, handleChange }) {
+  const { activeRuleIndex, setActiveRuleIndex, rulesets, addRule } =
     useContext(dataContext);
 
-  const [rule, setRule] = useState({
-    ruleName: "",
-    ruleContent: "",
-  });
-
-  const handleRuleChange = (e) => {
-    setRule({
-      ruleName: e.target.value,
-      ruleContent: "",
-    });
-  };
+  const [rules, setRules] = useState([]);
+  useEffect(() => {
+    setRules(rulesets.find((item) => item.id == id)?.rules);
+  }, [id, rulesets]);
 
   const handleIndexChange = (key) => {
     if (
       activeRuleIndex != null &&
-      editRuleData != rules[activeRuleIndex].ruleContent
+      editRule.ruleContent != rules[activeRuleIndex].ruleContent
     ) {
       alertBox(
         `Please save ${rules[activeRuleIndex].ruleName} before moving to ${rules[key].ruleName}`
       );
       return;
     }
-
     setActiveRuleIndex(key);
   };
+
   const appendRule = () => {
     if (rules.length == 0) setActiveRuleIndex(0);
-    setRules([...rules, rule]);
+    addRule(id, rule);
+    handleChange(null);
     handleCloseModal();
-    setRule({
-      ruleName: "",
-      ruleContent: "",
-    });
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -71,7 +61,7 @@ function AddRule() {
             <Form.Control
               name="ruleName"
               value={rule.ruleName}
-              onChange={handleRuleChange}
+              onChange={handleChange}
               autoComplete="false"
             />
           </InputGroup>

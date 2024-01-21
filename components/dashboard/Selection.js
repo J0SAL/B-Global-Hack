@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Dropdown, Form, Nav } from "react-bootstrap";
 import RulesTable from "./RulesTable";
 import dataContext from "../../hooks/DataContext/dataContext";
+import { alertBox } from "../../utils";
 
 function Selection() {
   const { rulesets, addRuleset } = useContext(dataContext);
@@ -20,14 +21,21 @@ function Selection() {
     );
   }, [rulesets, currentRuleset, currentRulesetgroup]);
 
+  useEffect(() => {
+    console.log("rulesets chnages");
+  }, [rulesets]);
   const [files, setFiles] = useState("");
 
   const handleFileChange = (e) => {
-    const fileReader = new FileReader();
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onload = (e) => {
-      setFiles(e.target.result);
-    };
+    try {
+      const fileReader = new FileReader();
+      fileReader.readAsText(e.target.files[0], "UTF-8");
+      fileReader.onload = (e) => {
+        setFiles(e.target.result);
+      };
+    } catch (e) {
+      alertBox();
+    }
   };
 
   useEffect(() => {

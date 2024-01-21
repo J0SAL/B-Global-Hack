@@ -179,7 +179,7 @@ function DataState({ children }) {
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const item = localStorage.getItem("prime_rulesets");
-      console.log(item);
+      // console.log(item);
       setRulesets(JSON.parse(item));
     } else {
       console.error("localStorage is not available in this environment.");
@@ -190,6 +190,9 @@ function DataState({ children }) {
   const updateLocalStorage = (data) => {
     localStorage.setItem("prime_rulesets", JSON.stringify(data));
   };
+  const getRulesets = async () => {
+    setRulesets(JSON.parse(localStorage.getItem("prime_rulesets")));
+  };
 
   const getRules = async () => {};
   const addRule = async (rulesetID, rule) => {
@@ -197,8 +200,8 @@ function DataState({ children }) {
     let idx = t.findIndex((item) => item.id == rulesetID);
     rule.rule_id = t[idx]?.rules.length ?? 0 + 1;
     t[idx].rules.push(rule);
-    setRulesets(t);
     updateLocalStorage(t);
+    getRulesets();
   };
   const updateRule = async (rulesetID, rule) => {
     let t = rulesets;
@@ -212,16 +215,25 @@ function DataState({ children }) {
     updateLocalStorage(t);
   };
 
+  const updateRuleset = async (idx, ruleset) => {
+    let t = rulesets;
+    t[idx] = ruleset;
+    await updateLocalStorage(t);
+    getRulesets();
+    alertBox("Ruleset updated", "success");
+  };
+
   const addRuleset = async (ruleset) => {
-    if (
-      rulesets.find(
-        (item) =>
-          item.id == ruleset.id &&
-          item.name == ruleset.name &&
-          item.group == ruleset.group
-      )
-    ) {
-      alertBox("Ruleset with same version, name, group already exist");
+    const idx = rulesets?.findIndex(
+      (item) =>
+        item.id == ruleset.id &&
+        item.name == ruleset.name &&
+        item.group == ruleset.group
+    );
+    if (idx >= 0) {
+      if (confirm("Ruleset with same version already exist Overwrite?")) {
+        updateRuleset(idx, ruleset);
+      }
       return;
     }
 

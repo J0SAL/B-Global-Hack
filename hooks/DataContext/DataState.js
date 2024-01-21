@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosClient from "./../../services/axios-client";
 import DataContext from "./dataContext";
+import { alertBox } from "../../utils";
 
 var demo_rulesets = [
   {
@@ -212,6 +213,18 @@ function DataState({ children }) {
   };
 
   const addRuleset = async (ruleset) => {
+    if (
+      rulesets.find(
+        (item) =>
+          item.id == ruleset.id &&
+          item.name == ruleset.name &&
+          item.group == ruleset.group
+      )
+    ) {
+      alertBox("Ruleset with same version, name, group already exist");
+      return;
+    }
+
     ruleset.id = rulesets?.length ?? 0 + 1;
     updateLocalStorage([...(rulesets ?? []), ruleset]);
     setRulesets([...(rulesets ?? []), ruleset]);

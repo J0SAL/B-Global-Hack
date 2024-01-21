@@ -12,7 +12,7 @@ import authContext from "../../hooks/AuthContext/authContext";
 
 const initData = {
   user_name: "",
-  password: "",
+  environment: "",
 };
 
 function Login() {
@@ -23,7 +23,9 @@ function Login() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
   const canSubmit =
-    formData.user_name.length > 0 && formData.password.length > 0 && !loading;
+    formData.user_name.length > 0 &&
+    formData.environment.length > 0 &&
+    !loading;
   const handleSubmit = async (e) => {
     try {
       setLoading(true);
@@ -50,14 +52,14 @@ function Login() {
               required
               name="user_name"
               type="text"
-              placeholder="John Doe"
+              placeholder="Enter Your Name"
               onChange={handleChange}
             />
           </InputGroup>
         </Form.Group>
 
-        <Form.Group id="password" className="mb-4">
-          <Form.Label>Your Password</Form.Label>
+        <Form.Group id="environment" className="mb-4">
+          <Form.Label>Environment</Form.Label>
 
           <InputGroup>
             <InputGroup.Text className="px-2">
@@ -65,9 +67,9 @@ function Login() {
             </InputGroup.Text>
             <Form.Control
               required
-              name="password"
-              type="password"
-              placeholder="Password"
+              name="environment"
+              type="text"
+              placeholder="Environment"
               onChange={handleChange}
             />
           </InputGroup>

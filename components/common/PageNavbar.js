@@ -34,7 +34,7 @@ function PageNavbar() {
               height="30"
               className="d-inline-block align-top mx-2 rounded-circle"
             />
-            BARCLAYS | PRIME
+            BARCLAYS | PRIME {user && <span>| {user?.environment}</span>}
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

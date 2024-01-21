@@ -33,7 +33,7 @@ function Home() {
         id="uncontrolled-tab-example"
         className="mb-3 mt-5"
       >
-        <Tab eventKey="home" title=<h2>Home</h2>>
+        <Tab eventKey="home" title=<h4>Home</h4>>
           <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
             {data.map((item, key) => (
               <div

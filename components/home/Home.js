@@ -33,16 +33,18 @@ function Home() {
         id="uncontrolled-tab-example"
         className="mb-3 mt-5"
       >
-        <Tab eventKey="home" title="Home">
+        <Tab eventKey="home" title=<h2>Home</h2>>
           <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
             {data.map((item, key) => (
               <div
                 key={key}
                 style={{
-                  background: "lightgrey",
+                  background: "#CED4DA",
                   width: "30vw",
                   padding: "3%",
                   marginTop: "40px",
+                  border: "2px solid black",
+                  boxShadow: "2px 2px 5px #ddddd",
                 }}
               >
                 <Link href={item.link} passHref>

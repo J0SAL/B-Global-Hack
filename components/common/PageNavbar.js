@@ -23,10 +23,10 @@ function PageNavbar() {
     { title: "How to use?", path: "/docs" },
   ];
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: "#00395d" }}>
       <Container>
         <Link href="/" passHref>
-          <Navbar.Brand>
+          <Navbar.Brand style={{ color: "white" }}>
             <img
               alt=""
               src="/assets/images/logo.png"
@@ -34,7 +34,7 @@ function PageNavbar() {
               height="30"
               className="d-inline-block align-top mx-2 rounded-circle"
             />
-            PRIME
+            BARCLAYS | PRIME
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -51,7 +51,10 @@ function PageNavbar() {
                     />
                     <div style={{ width: "5px" }}></div>
                     <div className="media-body align-items-center">
-                      <span className="my-0 font-small fw-semibold">
+                      <span
+                        className="my-0 font-small fw-semibold"
+                        style={{ color: "white" }}
+                      >
                         {user?.user_name ?? "Unknown"}
                       </span>
                     </div>
@@ -83,7 +86,7 @@ function PageNavbar() {
             )}
             {/* {!user && (
               <Link href="/sign-in" passHref>
-                <Nav.Link>Login/Sign-Up</Nav.Link>
+                <Nav.Link style={{ color: "white" }}>Login/Sign-Up</Nav.Link>
               </Link>
             )} */}
           </Nav>

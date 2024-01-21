@@ -29,7 +29,7 @@ function SignIn() {
               >
                 <div className="d-flex align-items-center justify-content-center">
                   <img width={48} src="/assets/images/logo.png" />
-                  <h4 className="mx-2">Prime</h4>
+                  <h4 className="mx-2">Barclays | Prime</h4>
                 </div>
 
                 <Login />

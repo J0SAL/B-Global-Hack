@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
       <Head>
-        <title>Prime</title>
+        <title>BARCLAYS | PRIME</title>
         <meta name="description" content="Sense Pro by Bits and Bytes" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

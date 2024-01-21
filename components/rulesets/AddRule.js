@@ -11,7 +11,7 @@ function AddRule({ id, rule, editRule, handleChange }) {
 
   const [rules, setRules] = useState([]);
   useEffect(() => {
-    setRules(rulesets.find((item) => item.id == id)?.rules);
+    if (id && rulesets) setRules(rulesets.find((item) => item.id == id)?.rules);
   }, [id, rulesets]);
 
   const handleIndexChange = (key) => {
@@ -78,6 +78,7 @@ function AddRule({ id, rule, editRule, handleChange }) {
         style={{
           boxShadow: "2px 2px 5px 2px lightblue",
           padding: "10px",
+          border: "1px solid black",
         }}
       >
         <div style={{ display: "flex", justifyContent: "right" }}>
@@ -110,7 +111,7 @@ function AddRule({ id, rule, editRule, handleChange }) {
               width: "100%",
             }}
           >
-            {rules.map((item, key) => (
+            {rules?.map((item, key) => (
               <div
                 key={key}
                 style={{

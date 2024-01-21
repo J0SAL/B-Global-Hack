@@ -80,12 +80,9 @@ function Selection() {
           />
         </div>
       </div>
-      <div className="row" style={{ minHeight: "33vh" }}>
+      <div className="row">
         <hr />
         {rulesetData && <RulesTable rulesetData={rulesetData} />}
-        <Link href="/" passHref>
-          <a>Back</a>
-        </Link>
       </div>
     </div>
   );

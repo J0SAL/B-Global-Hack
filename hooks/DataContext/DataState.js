@@ -37,7 +37,94 @@ var demo_rulesets = [
         ruleContent: "Rule2 Content",
       },
     ],
-    dictionaries: [],
+    dictionaries: [
+      {
+        dictId: 1,
+        dictName: "Decision Request",
+        dictContent: `
+        {
+          data: {
+            type: "verificationcontexts",
+            attribute: {
+              type: "APPLY CARD",
+              cpc: "EKS",
+              application: {
+                firstname: "Joy",
+                lastname: "Almedia",
+              },
+            },
+          },
+          alias: {
+            type: "application",
+            value: "10892929",
+          },
+        };`,
+      },
+      {
+        dictId: 2,
+        dictName: "ID",
+        dictContent: `
+        {
+          "id": "dummyid"
+        }`,
+      },
+      {
+        dictId: 3,
+        dictName: "Request Headers",
+        dictContent: `
+        {
+          "requestHeaders": ""
+        }`,
+      },
+      {
+        dictId: 4,
+        dictName: "Results",
+        dictContent: `
+        {
+          "response": {
+            "data": {
+              "id": "",
+              "type": "DECISION",
+              "attributes": {
+                "expertName": "eds-account-identitiy-verification",
+                "expertVersion": "1.0.1",
+                "engineVersion": "2.1.0ead9857-435",
+                "executionTimestamp": "",
+                "decision": {
+                  "advice": "",
+                  "reason": "",
+                  "verificationContexts": {
+                    "data": {
+                      "id": "",
+                      "type": "",
+                      "attributes": {}
+                    }
+                  }
+                },
+                "body": {}
+              }
+            },
+            "errors": [
+              {
+                "id": "",
+                "timestamp": "",
+                "title": "",
+                "details": "",
+                "code": ""
+              }
+            ]
+          }
+        }`,
+      },
+      {
+        dictId: 5,
+        dictName: "Tracking",
+        dictContent: `
+        {
+          "tracking": ""
+        }`,
+      },
+    ],
   },
   {
     id: 2,
@@ -62,27 +149,6 @@ var demo_rulesets = [
   },
   {
     id: 3,
-    version: "2.0.1",
-    status: "Previously Deployed",
-    name: "APPLY-CREDIT-CARD",
-    group: "CHAMPION",
-    lastmodifiedby: "Sagarika Matey",
-    lastmodifieddate: "2023-01-10 08:56:36",
-    options: [
-      {
-        name: "View Ruleset",
-        link: "",
-      },
-      {
-        name: "View change log",
-        link: "",
-      },
-    ],
-    rules: [],
-    dictionaries: [],
-  },
-  {
-    id: 4,
     version: "2.0.1",
     status: "Previously Deployed",
     name: "APPLY-CREDIT-CARD",

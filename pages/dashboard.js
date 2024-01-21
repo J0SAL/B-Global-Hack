@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function docs() {
   return (
-    <div>
+    <div style={{ minHeight: "80vh" }}>
       <Container>
         <h2 className="mt-3">Application Fraud</h2>
         <Note />
@@ -14,6 +14,7 @@ function docs() {
           defaultActiveKey="rulesets"
           id="uncontrolled-tab-example"
           className="mb-3 mt-5"
+          style={{ fontWeight: "bold", color: "black" }}
         >
           <Tab eventKey="rulesets" title="RuleSets">
             <Selection />
@@ -23,6 +24,9 @@ function docs() {
           <Tab eventKey="test" title="Test hub"></Tab>
           <Tab eventKey="compare" title="Compare Rulesets"></Tab>
         </Tabs>
+        <Link href="/" passHref>
+          <a>Back</a>
+        </Link>
       </Container>
     </div>
   );

@@ -8,7 +8,7 @@ function EditRule({ id, editRule, setEditRule }) {
 
   const [rules, setRules] = useState([]);
   useEffect(() => {
-    setRules(rulesets.find((item) => item.id == id)?.rules);
+    if (id && rulesets) setRules(rulesets.find((item) => item.id == id)?.rules);
   }, [id, rulesets]);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ function EditRule({ id, editRule, setEditRule }) {
         style={{
           boxShadow: "2px 2px 5px 2px lightblue",
           padding: "10px",
+          border: "1px solid black",
         }}
       >
         <Form.Control
@@ -35,7 +36,7 @@ function EditRule({ id, editRule, setEditRule }) {
           onChange={(e) =>
             setEditRule({ ...editRule, ruleContent: e.target.value })
           }
-          value={editRule.ruleContent}
+          value={editRule?.ruleContent}
           disabled={activeRuleIndex == null}
         ></Form.Control>
         <div

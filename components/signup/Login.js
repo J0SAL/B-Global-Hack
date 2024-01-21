@@ -5,6 +5,7 @@ import {
   faEnvelope,
   faUnlockAlt,
   faSpinner,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
 import authContext from "../../hooks/AuthContext/authContext";
@@ -42,7 +43,7 @@ function Login() {
           <Form.Label>Your Name</Form.Label>
           <InputGroup>
             <InputGroup.Text className="px-2">
-              <FontAwesomeIcon icon={faEnvelope} style={{ width: "15px" }} />
+              <FontAwesomeIcon icon={faUser} style={{ width: "15px" }} />
             </InputGroup.Text>
             <Form.Control
               autoFocus

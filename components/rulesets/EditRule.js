@@ -12,12 +12,18 @@ function EditRule({ id, editRule, setEditRule }) {
   }, [id, rulesets]);
 
   useEffect(() => {
-    if (activeRuleIndex != null) setEditRule(rules[activeRuleIndex]);
+    if (activeRuleIndex != null)
+      setEditRule(rules.find((item) => item.rule_id == activeRuleIndex));
   }, [id, activeRuleIndex]);
 
   const handleRuleSave = () => {
     updateRule(id, editRule);
-    alertBox(`${rules[activeRuleIndex].ruleName} Updated`, "success");
+    alertBox(
+      `${
+        rules.find((item) => item.rule_id == activeRuleIndex).ruleName
+      } Updated`,
+      "success"
+    );
   };
   return (
     <>

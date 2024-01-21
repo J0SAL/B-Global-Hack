@@ -1,26 +1,42 @@
 import { faCirclePlus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Form, InputGroup, Modal } from "react-bootstrap";
+import { Button, Dropdown, Form, InputGroup, Modal } from "react-bootstrap";
 import dataContext from "../../hooks/DataContext/dataContext";
 import { alertBox } from "../../utils";
 
 function AddRule({ id, rule, editRule, handleChange }) {
-  const { activeRuleIndex, setActiveRuleIndex, rulesets, addRule } =
-    useContext(dataContext);
+  const {
+    activeRuleIndex,
+    setActiveRuleIndex,
+    rulesets,
+    addRule,
+    swapRulesOrder,
+  } = useContext(dataContext);
 
   const [rules, setRules] = useState([]);
   useEffect(() => {
-    if (id && rulesets) setRules(rulesets.find((item) => item.id == id)?.rules);
+    if (id && rulesets)
+      setRules(
+        rulesets
+          .find((item) => item.id == id)
+          ?.rules.sort((a, b) => a.order - b.order)
+      );
   }, [id, rulesets]);
 
   const handleIndexChange = (key) => {
     if (
       activeRuleIndex != null &&
-      editRule.ruleContent != rules[activeRuleIndex].ruleContent
+      editRule &&
+      editRule.ruleContent !=
+        rules.find((item) => item.rule_id == activeRuleIndex).ruleContent
     ) {
       alertBox(
-        `Please save ${rules[activeRuleIndex].ruleName} before moving to ${rules[key].ruleName}`
+        `Please save ${
+          rules.find((item) => item.rule_id == activeRuleIndex).ruleName
+        } before moving to ${
+          rules.find((item) => item.rule_id == key).ruleName
+        }`
       );
       return;
     }
@@ -106,29 +122,65 @@ function AddRule({ id, rule, editRule, handleChange }) {
             style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
               width: "100%",
             }}
           >
             {rules?.map((item, key) => (
               <div
-                key={key}
                 style={{
-                  border: "1px solid black",
-                  margin: "15px 0px",
-                  padding: "10px",
-                  width: "80%",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  border:
-                    key == activeRuleIndex
-                      ? "5px solid lightblue"
-                      : "1px solid",
+                  height: "100%",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-                onClick={() => handleIndexChange(key)}
               >
-                {item.ruleName}
+                <div
+                  key={key}
+                  style={{
+                    border: "1px solid black",
+                    margin: "15px 0px",
+                    padding: "10px",
+                    width: "80%",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    border:
+                      item.rule_id == activeRuleIndex
+                        ? "5px solid lightblue"
+                        : "1px solid",
+                  }}
+                  onClick={() => handleIndexChange(item.rule_id)}
+                >
+                  {item.ruleName}
+                </div>
+                <Dropdown>
+                  <Dropdown.Toggle variant="" id="dropdown-basic">
+                    ...
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {key != 0 && (
+                      <Dropdown.Item
+                        onClick={() => swapRulesOrder(id, item, rules[key - 1])}
+                      >
+                        Move Up
+                      </Dropdown.Item>
+                    )}
+                    {key != rules.length - 1 && (
+                      <Dropdown.Item
+                        onClick={() => swapRulesOrder(id, item, rules[key + 1])}
+                      >
+                        Move Down
+                      </Dropdown.Item>
+                    )}
+                    <Dropdown.Item onClick={() => console.log()}>
+                      Delete Rule
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => console.log()}>
+                      Add Child Rule
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
             ))}
           </div>

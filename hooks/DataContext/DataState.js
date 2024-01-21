@@ -198,7 +198,8 @@ function DataState({ children }) {
   const addRule = async (rulesetID, rule) => {
     let t = rulesets;
     let idx = t.findIndex((item) => item.id == rulesetID);
-    rule.rule_id = t[idx]?.rules.length ?? 0 + 1;
+    rule.rule_id = (t[idx]?.rules.length ?? 0) + 1;
+    rule.order = rule.rule_id;
     t[idx].rules.push(rule);
     updateLocalStorage(t);
     getRulesets();
@@ -211,8 +212,16 @@ function DataState({ children }) {
     );
     t[rulesets_idx].rules[rule_idx] = rule;
 
-    setRulesets(t);
     updateLocalStorage(t);
+    getRulesets();
+  };
+
+  const swapRulesOrder = async (rulesetID, rule1, rule2) => {
+    let temp_order = rule1.order;
+    rule1.order = rule2.order;
+    rule2.order = temp_order;
+    await updateRule(rulesetID, rule1);
+    await updateRule(rulesetID, rule2);
   };
 
   const updateRuleset = async (idx, ruleset) => {
@@ -237,7 +246,7 @@ function DataState({ children }) {
       return;
     }
 
-    ruleset.id = rulesets?.length ?? 0 + 1;
+    ruleset.id = (rulesets?.length ?? 0) + 1;
     updateLocalStorage([...(rulesets ?? []), ruleset]);
     setRulesets([...(rulesets ?? []), ruleset]);
   };
@@ -269,6 +278,7 @@ function DataState({ children }) {
         addRule,
         updateRule,
         addRuleset,
+        swapRulesOrder,
       }}
     >
       {children}

@@ -21,9 +21,6 @@ function Selection() {
     );
   }, [rulesets, currentRuleset, currentRulesetgroup]);
 
-  useEffect(() => {
-    console.log("rulesets chnages");
-  }, [rulesets]);
   const [files, setFiles] = useState("");
 
   const handleFileChange = (e) => {

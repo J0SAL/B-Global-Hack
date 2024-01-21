@@ -3,7 +3,6 @@ import { Button, Dropdown, Nav, Table } from "react-bootstrap";
 import { exportToJson } from "../../utils";
 
 function RulesTable({ rulesetData }) {
-  console.log("in table", rulesetData);
   return (
     <div
       style={{

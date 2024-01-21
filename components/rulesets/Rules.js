@@ -11,6 +11,7 @@ function Rules({ id }) {
     ruleName: "",
     ruleContent: "",
     rule_id: null,
+    order: null,
   });
 
   const handleChange = (event) => {

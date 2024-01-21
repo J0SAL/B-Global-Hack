@@ -128,7 +128,7 @@ function DataState({ children }) {
   const addRule = async (rulesetID, rule) => {
     let t = rulesets;
     let idx = t.findIndex((item) => item.id == rulesetID);
-    rule.rule_id = t[idx].rules.length + 1;
+    rule.rule_id = t[idx]?.rules.length ?? 0 + 1;
     t[idx].rules.push(rule);
     setRulesets(t);
     updateLocalStorage(t);
@@ -146,9 +146,9 @@ function DataState({ children }) {
   };
 
   const addRuleset = async (ruleset) => {
-    ruleset.id = rulesets.length + 1;
-    updateLocalStorage([...rulesets, ruleset]);
-    setRulesets([...rulesets, ruleset]);
+    ruleset.id = rulesets?.length ?? 0 + 1;
+    updateLocalStorage([...(rulesets ?? []), ruleset]);
+    setRulesets([...(rulesets ?? []), ruleset]);
   };
   const deleteRule = async () => {};
 

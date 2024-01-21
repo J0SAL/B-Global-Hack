@@ -67,7 +67,7 @@ const Verbs = ({ id }) => {
           >
             <Card.Body>
               <Card.Title>Verb Content</Card.Title>
-              {selectedDict.verbContent && (
+              {selectedDict?.verbContent && (
                 <Card.Text>
                   <pre>
                     {JSON.parse(JSON.stringify(selectedDict.verbContent))}

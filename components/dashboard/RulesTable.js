@@ -7,6 +7,7 @@ function RulesTable({ rulesetData }) {
     <div
       style={{
         maxHeight: "32vh",
+        height: "32vh",
         overflowY: "scroll",
       }}
     >

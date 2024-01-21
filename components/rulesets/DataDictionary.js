@@ -67,7 +67,7 @@ const DataDictionary = ({ id }) => {
           >
             <Card.Body>
               <Card.Title>Data Dictionary</Card.Title>
-              {selectedDict.dictContent && (
+              {selectedDict?.dictContent && (
                 <Card.Text>
                   <pre>
                     {JSON.parse(JSON.stringify(selectedDict.dictContent))}

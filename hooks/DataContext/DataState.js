@@ -179,8 +179,8 @@ function DataState({ children }) {
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const item = localStorage.getItem("prime_rulesets");
-      // console.log(item);
-      setRulesets(JSON.parse(item));
+      if (item) setRulesets(JSON.parse(item));
+      else setRulesets(JSON.parse("[]"));
     } else {
       console.error("localStorage is not available in this environment.");
     }

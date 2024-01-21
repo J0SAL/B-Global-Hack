@@ -37,7 +37,7 @@ function Selection() {
 
   useEffect(() => {
     if (files) {
-      if (confirm("Add rule to the ruleset?")) {
+      if (confirm("Add ruleset?")) {
         let jsonfile = JSON.parse(files);
         addRuleset(jsonfile);
       }

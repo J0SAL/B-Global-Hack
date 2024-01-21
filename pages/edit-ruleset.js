@@ -30,7 +30,7 @@ function editRuleset() {
             <GeneratedCode id={id} />
           </Tab> */}
           <Tab eventKey="verbs" title="Verbs">
-            <Verbs />
+            <Verbs id={id} />
           </Tab>
           <Tab eventKey="models" title="Models">
             <Models />

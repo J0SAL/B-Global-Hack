@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import dataContext from "../../hooks/DataContext/dataContext";
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { alertBox } from "../../utils";
 
 function EditRule({ id, editRule, setEditRule }) {
@@ -34,6 +34,7 @@ function EditRule({ id, editRule, setEditRule }) {
           border: "1px solid black",
         }}
       >
+        <Card.Title className="my-2">Rule Content</Card.Title>
         <Form.Control
           as="textarea"
           name="ruleContent"

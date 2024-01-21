@@ -1,7 +1,14 @@
 import { faCirclePlus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Dropdown, Form, InputGroup, Modal } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Dropdown,
+  Form,
+  InputGroup,
+  Modal,
+} from "react-bootstrap";
 import dataContext from "../../hooks/DataContext/dataContext";
 import { alertBox } from "../../utils";
 
@@ -97,6 +104,9 @@ function AddRule({ id, rule, editRule, handleChange }) {
           border: "1px solid black",
         }}
       >
+        <Card.Title className="d-flex justify-content-center align-items-center my-2">
+          <h5>Rules</h5>
+        </Card.Title>
         <div style={{ display: "flex", justifyContent: "right" }}>
           <div
             style={{
